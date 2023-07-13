@@ -83,19 +83,11 @@ class App extends Component {
         progress: undefined,
         theme: 'colored',
       });
-    const badLoad =
-      totalHits === 0 &&
-      toast.warn(
-        'Please enter a valid name or your search did not return any results',
-        {
-          position: 'top-right',
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          progress: undefined,
-          theme: 'colored',
-        }
-      );
+    const badLoad = totalHits === 0 && (
+      <h2 style={{ textAlign: 'center', fontWeight: 'bold' }}>
+        Please enter a valid name or your search did not return any results
+      </h2>
+    );
 
     return (
       <div>
