@@ -88,10 +88,10 @@ class App extends Component {
       toast.warn(
         'Please enter a valid name or your search did not return any results',
         {
-          position: 'top-center',
+          position: 'top-right',
           autoClose: 2000,
           hideProgressBar: false,
-          closeOnClick: true,
+          closeOnClick: false,
           progress: undefined,
           theme: 'colored',
         }
