@@ -7,6 +7,7 @@ import Button from './Button';
 import Loader from './Loader';
 import Searchbar from './Searchbar';
 import ImageGallery from './ImageGallery';
+import ModalLoader from './Modal/ModalLoader';
 
 class App extends Component {
   state = {
@@ -39,12 +40,42 @@ class App extends Component {
     const { search, page, items } = this.state;
     try {
       const data = await searchPosts(search, page);
+      if (data.totalHits === 0) {
+        toast.warn(
+          <h2>
+            "Please enter a valid name or your search did not return any
+            results"
+          </h2>,
+          {
+            position: 'top-center',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'colored',
+          }
+        );
+      }
       this.setState({
         items: [...items, ...data.hits],
         loading: false,
         totalHits: data.totalHits,
       });
     } catch (error) {
+      if (error) {
+        toast.error('Error with loading!', {
+          position: 'top-center',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        });
+      }
       this.setState({
         loading: false,
         error: error,
@@ -70,24 +101,8 @@ class App extends Component {
   };
 
   render() {
-    const { items, loading, error, modalOpen, modalContent, totalHits } =
-      this.state;
+    const { items, loading, modalOpen, modalContent, totalHits } = this.state;
     const { loadMore, changeSearch, showModal, closeModal } = this;
-    const errorLoad =
-      error &&
-      toast.error('Error with loading!', {
-        position: 'top-center',
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        progress: undefined,
-        theme: 'colored',
-      });
-    const badLoad = totalHits === 0 && (
-      <h2 style={{ textAlign: 'center', fontWeight: 'bold' }}>
-        Please enter a valid name or your search did not return any results
-      </h2>
-    );
 
     return (
       <div>
@@ -97,9 +112,11 @@ class App extends Component {
           </Modal>
         )}
         <Searchbar changeSearch={changeSearch} />
-        {loading && <Loader />}
-        {errorLoad}
-        {badLoad}
+        {loading && (
+          <ModalLoader>
+            <Loader />
+          </ModalLoader>
+        )}
 
         <ImageGallery items={items} showModal={showModal} />
 

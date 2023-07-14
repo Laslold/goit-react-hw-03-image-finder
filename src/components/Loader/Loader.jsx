@@ -4,15 +4,15 @@ function Loader() {
   return (
     <LoaderStyle>
       <CirclesWithBar
-        height="100"
-        width="100"
-        color="#3f51b5"
+        height="200"
+        width="200"
+        color="#fafafa"
         wrapperStyle={{}}
         wrapperClass=""
         visible={true}
-        outerCircleColor=""
+        outerCircleColor="#3f51b5"
         innerCircleColor=""
-        barColor=""
+        barColor="#3f51b5"
         ariaLabel="circles-with-bar-loading"
       />
     </LoaderStyle>
