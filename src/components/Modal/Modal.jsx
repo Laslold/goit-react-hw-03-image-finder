@@ -16,13 +16,13 @@ class Modal extends Component {
   }
 
   handleClose = e => {
-    if (e.target === e.currentTarget) {
+    if (e.target === e.currentTarget || e.code === 'Escape') {
       this.props.close();
       return;
     }
-    if (e.code === 'Escape') {
-      this.props.close();
-    }
+    // if (e.code === 'Escape') {
+    //   this.props.close();
+    // }
   };
 
   render() {

@@ -1,11 +1,11 @@
-import { Component } from "react";
-import PropTypes from "prop-types";
-import { ImSearch } from "react-icons/im";
-import style from "./searchbarForm.module.css";
+import { Component } from 'react';
+import PropTypes from 'prop-types';
+import { ImSearch } from 'react-icons/im';
+import style from './searchbarForm.module.css';
 
 class SearchbarForm extends Component {
   state = {
-    search: "",
+    search: '',
   };
 
   handleChange = ({ target }) => {
@@ -14,12 +14,12 @@ class SearchbarForm extends Component {
       [name]: value,
     });
   };
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     const { onSubmit } = this.props;
     onSubmit({ ...this.state });
     this.setState({
-      search: "",
+      search: '',
     });
   };
   render() {

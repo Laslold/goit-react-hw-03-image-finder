@@ -21,7 +21,7 @@ class App extends Component {
     modalContent: {},
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_, prevState) {
     const { page, search } = this.state;
     if (page > prevState.page || search !== prevState.search) {
       this.fetchPosts();
@@ -31,6 +31,7 @@ class App extends Component {
     this.setState({
       search: search.trim(),
       items: [],
+      page: 1,
     });
   };
   async fetchPosts() {
@@ -108,6 +109,7 @@ class App extends Component {
       <div>
         {modalOpen && (
           <Modal close={closeModal}>
+            
             <img src={modalContent.largeImageURL} alt={modalContent.tags} />
           </Modal>
         )}
